@@ -7,31 +7,29 @@
 #include <ctime>
 #include <fstream>
 
-enum LogLevel {
-	DEBUG,
-	INFO,
-	WARNING,
-	ERROR,
-	NONE
-};
 
-class Log{
-	public:
-		static void debug(const std::string&);
-		static void info(const std::string&);
-		static void warning(const std::string&);
-		static void error(const std::string&);
-	private:
-		static LogLevel level;
-		static bool log_to_file;
-		static std::string file_path;
-		static const std::string color_reset;
-		static const std::string color_error;
-		static const std::string color_warning;
-		static const std::string color_info;
-		static const std::string color_debug;
-		static void put_line(const std::string& color, const std::string& level,  const std::string& input);
-		static void write_to_file(const std::string& level, const std::string& timestamp, const std::string& input);
-		Log();	// Remove constructor
-		~Log();	// Remove destructor
-};
+namespace Log{
+
+	enum LogLevel {
+		DEBUG,
+		INFO,
+		WARNING,
+		ERROR,
+		NONE
+	};
+
+	const LogLevel level = DEBUG;
+	const bool log_to_file = true;
+	const std::string file_path = "log.log" ;
+
+	const std::string color_reset=  "\033[0m";			// Reset formatting
+	const std::string color_error = "\033[1;31m";		// Red
+	const std::string color_warning= "\033[1;33m";		// Yellow
+	const std::string color_info = "\033[1;34m";		// Blue
+	const std::string color_debug= "\033[1;95m";		// Magenta
+
+	void debug(const std::string&);
+	void info(const std::string&);
+	void warning(const std::string&);
+	void error(const std::string&);
+}
