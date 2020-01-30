@@ -1,2 +1,2 @@
 # Logging-Cpp
-A very simple logging implementation with coloured output and file support.
+A very simple header only logging implementation with coloured output and log to file support.
