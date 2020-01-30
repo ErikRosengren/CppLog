@@ -6,6 +6,12 @@ const std::string Log::color_warning= "\033[1;33m";
 const std::string Log::color_info = "\033[1;34m";
 const std::string Log::color_debug= "\033[1;95m";
 
+// Defaults
+LogLevel Log::level = DEBUG;
+std::string Log::file_path = "log.log";
+bool Log::log_to_file = true;
+
+
 void Log::debug(const std::string& input){
 	if(Log::level != DEBUG || Log::level == NONE){
 		return;
