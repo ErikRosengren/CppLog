@@ -39,12 +39,10 @@ namespace Log{
 
 			if(!file){
 				file.open(file_path, std::fstream::in | std::fstream::out | std::fstream::trunc);
-				file << level << " - " << timestamp << input << std::endl;
-				file.close();
-			} else {
-				file << level << " - " << timestamp << input << std::endl;
-				file.close();
 			}
+
+			file << level << " " << timestamp << input << std::endl;
+			file.close();
 		}
 
 		void put_line(const std::string& color, const std::string& level, const std::string& input){
@@ -76,7 +74,7 @@ namespace Log{
 			return;
 		}
 
-		put_line(color_info, "INFO", input);
+		put_line(color_info, "INFO ", input);
 	}
 
 	void warning(const std::string& input){
@@ -84,7 +82,7 @@ namespace Log{
 			return;
 		}
 
-		put_line(color_warning, "WARNING", input);
+		put_line(color_warning, "WARN ", input);
 	}
 
 	void error(const std::string& input){
