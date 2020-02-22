@@ -1,5 +1,5 @@
 # CppLog
-A very simple header only logging implementation with coloured output and log to file support.
+A very simple logging implementation with coloured output and log to file support.
 
 ## Settings
 Changing file path, log level, colours or disabling file logging can be done in the header file. 
