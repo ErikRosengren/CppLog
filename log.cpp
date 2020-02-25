@@ -1,9 +1,8 @@
 #include "log.hpp"
 
-namespace Log{
+namespace Log {
 
 	namespace {
-
 		void write_to_file(const std::string& level, const std::string& timestamp, const std::string& input){
 			std::fstream file;
 
@@ -13,7 +12,7 @@ namespace Log{
 				file.open(file_path, std::fstream::in | std::fstream::out | std::fstream::trunc);
 			}
 
-			file << level << " " << timestamp << input << std::endl;
+			file << level << timestamp << input;
 			file.close();
 		}
 
@@ -24,7 +23,7 @@ namespace Log{
 			ss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S: ");
 			std::string timestamp = ss.str();
 
-			std::cout << color << timestamp << input << color_reset << std::endl;
+			std::cout << color << level << timestamp << color_reset << input;
 
 			if(log_to_file){
 				write_to_file(level, timestamp, input);
@@ -32,35 +31,35 @@ namespace Log{
 		}
 	}
 
-	void debug(const std::string& input){
-		if(level != DEBUG || level == NONE){
+	void debug(const std::string input){
+		if(level != LEVEL_DEBUG || level == LEVEL_NONE){
 			return;
 		}
 
-		put_line(color_debug, "DEBUG", input);
+		put_line(color_debug, "DEBUG ", input);
 	}
 
-	void info(const std::string& input){
-		if((level != DEBUG && level != INFO) || level == NONE){
+	void info(const std::string input){
+		if((level != LEVEL_DEBUG && level != LEVEL_INFO) || level == LEVEL_NONE){
 			return;
 		}
 
-		put_line(color_info, "INFO ", input);
+		put_line(color_info, "INFO  ", input);
 	}
 
-	void warning(const std::string& input){
-		if((level != DEBUG && level != INFO && level != WARNING)  || level == NONE){
+	void warning(const std::string input){
+		if((level != LEVEL_DEBUG && level != LEVEL_INFO && level != LEVEL_WARNING)  || level == LEVEL_NONE){
 			return;
 		}
 
-		put_line(color_warning, "WARN ", input);
+		put_line(color_warning, "WARN  ", input);
 	}
 
-	void error(const std::string& input){
-		if(level == NONE){
+	void error(const std::string input){
+		if(level == LEVEL_NONE){
 			return;
 		}
 
-		put_line(color_error, "ERROR", input);
+		put_line(color_error, "ERROR ", input);
 	}
 }
